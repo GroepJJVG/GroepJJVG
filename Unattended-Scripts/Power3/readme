@@ -1,0 +1,18 @@
+Power 3 is the whole shabang. It does everything for you down to the letter. It installs ADDS, DNS and DHCP it's basically baby food.
+
+While Power 2 changed the first script with DNS, the second script mostly does the second script with the installation and configuration in the second script. 
+This is because the installation and configuration for both ADDS and DHCP is required for it too properly work.
+
+This is for Period 1 where they can explore
+
+autounattend.xml: Het enige wat bij de unattended XML hoeft aangepast te worden is in principe het wachtwoord. Computer naam IP's ETC, wordt allemaal automatisch gedaan in het PowerShell script.
+<Password>
+                    <Value>P@ssw0rd123!</Value>
+                    <PlainText>true</PlainText>
+                </Password>
+ <UserAccounts>
+                <AdministratorPassword>
+                    <Value>P@ssw0rd123!</Value>
+                    <PlainText>true</PlainText>
+                </AdministratorPassword>
+            </UserAccounts>
