@@ -1,0 +1,4 @@
+This would be for period 3 and is called Power 1 for only installing the hardest component of a ADDS, which is the Active Directory.
+
+It setups the whole Active Directory but leaves out DNS and DHCP. Like the previous it configures the network and is also the start of the task scheduler with it's 2 scripts.
+
