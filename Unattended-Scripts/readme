@@ -1,0 +1,9 @@
+These unattended scripts may look weird in it's namegiving as I call them Power.
+
+Power is just in fact the amount of things they do. With Power 0 being the lowest basically doing nothing and Power 3 being in this case the highest.
+
+They represent the 4 periods of the year in the schoolyear and have it's focus on ADDS, DNS and DHCP. 
+
+All scripts except Power 0 will have a transcript in case something will go wrong we can look at it and we can see what the error was that was given and can then fix it.
+
+The scripts have been tested on a test environment and seemed to be working just fine.
