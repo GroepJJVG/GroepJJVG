@@ -1,0 +1,3 @@
+[defaults]
+inventory = inventory.ini
+ssh_args = -o ForwardAgent=yes -o ControlMaster=auto -o ControlPersist=60s -i ~/.ssh/authorized_keys  # Update with the correct SSH key

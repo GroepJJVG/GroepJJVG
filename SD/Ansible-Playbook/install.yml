@@ -1,0 +1,57 @@
+---
+- name: Install Apache2 with PHP support on webservers
+  hosts: webservers
+  become: true
+  vars:
+    php_packages:
+      - php
+      - libapache2-mod-php
+      - php-mysql  # PHP MySQL extension to interface with MariaDB
+
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install Apache2 and PHP
+      apt:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - apache2
+        - "{{ php_packages }}"
+
+    - name: Enable Apache2 mod_rewrite
+      command: a2enmod rewrite
+      notify: restart apache2
+
+    - name: Restart Apache2
+      service:
+        name: apache2
+        state: restarted
+
+  handlers:
+    - name: restart apache2
+      service:
+        name: apache2
+        state: restarted
+
+- name: Install MariaDB on databases
+  hosts: databases
+  become: true
+
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install MariaDB Server
+      apt:
+        name: mariadb-server
+        state: present
+
+    - name: Ensure MariaDB is started and enabled
+      service:
+        name: mariadb
+        state: started
+        enabled: true

@@ -1,0 +1,66 @@
+---
+- name: Uninstall Apache2 with PHP support from webservers
+  hosts: webservers
+  become: true
+  vars:
+    php_packages:
+      - php
+      - libapache2-mod-php
+      - php-mysql
+
+  tasks:
+    - name: Stop Apache2 service
+      service:
+        name: apache2
+        state: stopped
+
+    - name: Disable Apache2 service
+      service:
+        name: apache2
+        enabled: no
+
+    - name: Uninstall Apache2 and PHP
+      apt:
+        name: "{{ item }}"
+        state: absent
+      loop:
+        - apache2
+        - "{{ php_packages }}"
+
+    - name: Remove any Apache2 and PHP configuration leftovers
+      file:
+        path: "{{ item }}"
+        state: absent
+      loop:
+        - /etc/apache2
+        - /var/www/html
+        - /etc/php
+
+- name: Uninstall MariaDB from databases
+  hosts: databases
+  become: true
+
+  tasks:
+    - name: Stop MariaDB service
+      service:
+        name: mariadb
+        state: stopped
+
+    - name: Disable MariaDB service
+      service:
+       name: mariadb
+       enabled: no
+
+    - name: Uninstall MariaDB server
+      apt:
+       name: mariadb-server
+       state: absent
+
+    - name: Remove any MariaDB configuration and data
+      file:
+        path: "{{ item }}"
+        state: absent
+      loop:
+        - /etc/mysql
+        - /var/lib/mysql
+        - /var/log/mysql
